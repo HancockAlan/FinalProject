@@ -137,6 +137,7 @@
 	$('#delete-project').submit(function(e) {
 
 		library.deleteRows("projects",{name: currentProject});
+		library.commit();
 		
 		jQT.goTo('#home','slidedown');
 		
