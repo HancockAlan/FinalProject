@@ -11,9 +11,9 @@
 	
 	library.deleteRows("projects");
 	
-	library.insert("projects",{name: "John's Website", rate: 45, description: "Need it done by Thursday at noon.", lastStart: $.now()});
-	library.commit()
-	currentProject = "John's Website";
+//	library.insert("projects",{name: "John's Website", rate: 45, description: "Need it done by Thursday at noon.", lastStart: $.now()});
+//	library.commit()
+//	currentProject = "John's Website";
 	
 	
 	// instantiate jQTouch	
@@ -41,8 +41,13 @@
 	});
 	
 	$('.click-project').live("click", function(event) {
-//		console.log(event);
-//		console.log(event.currentTarget.attributes);
+		clickedID = this.getAttribute("id");
+		
+		library.query("projects", function(p) {
+			if (p.ID == clickedID) {
+				currentProject = p.name;
+			}
+		})
 	});
 	
 	$('#new-project').bind('pageAnimationStart', function(event,info) {
@@ -87,8 +92,16 @@
 	});
 	
 	$('#view-project .startstop').live('click', function() {
-		if (clock.running == true) clock.stop();
-		else if (clock.running == false) clock.start();
+		if (clock.running == true) {
+			clock.stop();
+		}
+		
+		else if (clock.running == false) {
+			clock.start();
+			library.query("projects",{name:currentProject}, function(p) {
+				p.lastStart = $.now()
+			});
+		}
 	})
 	
 	$('#add-project').submit(function(e) {
@@ -130,9 +143,7 @@
 	});
 	
 	$('#delete-project').submit(function(e) {
-	
-		console.log("something");
-		
+
 		library.deleteRows("projects",{name: currentProject});
 		
 		jQT.goTo('#home','slidedown');
