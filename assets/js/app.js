@@ -1,6 +1,10 @@
 ;(function($, window) {
 	
 	var library = new localStorageDB("projectsLibrary");
+	var currentProject = {
+		word: "hello",
+		goodbye: "no"
+	};
 	
 	if (library.isNew()) {
 		library.createTable("projects",["name","rate","description"]);
@@ -16,12 +20,12 @@
 		$(".projects-list").empty();
 		
 		if (library.rowCount("projects") == 0) {
-			$(".projects-list").append('<li><span>Currently no projects</span></li>');
+			$(".projects-list").append('<li><span>Currently no projects</span></li><a href="#new-project" class="whiteButton slideup">Add a New Project</a>');
 		}
 		
 		else {
 			library.query("projects", function(p) {
-				$(".projects-list").append('<li><span>' + p.name + ' ' + p.rate + ' ' + p.description + '</span></li>');
+				$(".projects-list").append('<a id="click-project" href="#" ><li><span>' + p.name + '</span><i class="icon-chevron-right"></i></li></a>');
 			})
 		}
 	};
@@ -30,6 +34,10 @@
 		if (info.direction == "in") {
 			update_projects();
 		}
+	});
+	
+	$('#click-project').bind("clickEvent", function() {
+		console.log("something");
 	});
 	
 	$('#new-project').bind('pageAnimationEnd', function(event,info) {
@@ -43,7 +51,7 @@
 			alert("edit project in");
 		}
 	});
-	
+
 	$('#add-project').submit(function(e) {
 		
 		var $t = $(this);
@@ -67,6 +75,11 @@
 		
 	});
 	
+	var clock = $('.clock').FlipClock({
+	
+	});
+	
 	update_projects();
+	console.log(currentProject);
 	
 }(jQuery, this));
