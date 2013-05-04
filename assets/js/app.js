@@ -45,9 +45,12 @@
 //		console.log(event.currentTarget.attributes);
 	});
 	
-	$('#new-project').bind('pageAnimationEnd', function(event,info) {
+	$('#new-project').bind('pageAnimationStart', function(event,info) {
 		if (info.direction == "in") {
-
+			var $t = $(this);
+			$t.find('#project-name').val('');
+			$t.find('#project-rate').val('');
+			$t.find('#project-description').val('');
 		}
 	});
 	
@@ -84,7 +87,8 @@
 	});
 	
 	$('#view-project .startstop').live('click', function() {
-		
+		if (clock.running == true) clock.stop();
+		else if (clock.running == false) clock.start();
 	})
 	
 	$('#add-project').submit(function(e) {
@@ -94,13 +98,8 @@
 		var rate = $t.find('#project-rate').val();
 		var description = $t.find('#project-description').val();
 		
-		
 		library.insert("projects", {name: name, rate: rate, description: description, lastStart: 0});
 		library.commit()
-		
-		
-		console.log( library.query("projects") );
-		console.log( "number of projects: " + library.rowCount("projects") );
 		
 		jQT.goTo('#home','slidedown');
 		
@@ -116,17 +115,12 @@
 		var name = $t.find('#project-name').val();
 		var rate = $t.find('#project-rate').val();
 		var description = $t.find('#project-description').val();
-		
-		
-		library.insert("projects", currentProject, {name: name, rate: rate, description: description, lastStart: currentLastStart});
+				
+		library.insertOrUpdate("projects", {name: currentProject}, {name: name, rate: rate, description: description, lastStart: currentLastStart});
 		library.commit()
 		
 		currentProject = name;
-		
-		
-		console.log( library.query("projects") );
-		console.log( "number of projects: " + library.rowCount("projects") );
-		
+
 		jQT.goTo('#view-project','slidedown');
 		
 		e.preventDefault();
@@ -134,6 +128,19 @@
 		return false;
 		
 	});
+	
+	$('#delete-project').submit(function(e) {
+	
+		console.log("something");
+		
+		library.deleteRows("projects",{name: currentProject});
+		
+		jQT.goTo('#home','slidedown');
+		
+		e.preventDefault();
+		
+		return false;
+	})
 	
 	var clock = $('.clock').FlipClock({ autoStart: false });
 	
