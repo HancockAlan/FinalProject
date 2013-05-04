@@ -31,7 +31,11 @@
 					<h1>Projects</h1>
 					<a class="button slideup" href="#new-project"><i class="icon-plus"></i></a>
 				</header>
+				
+				<div class="page">
 
+				</div>
+				
 			</div>
 			
 			<div id="new-project">
@@ -40,6 +44,28 @@
 					<h1>Add Project</h1>
 					<a class="back" href="#home"><i class="icon-home"></i></a>
 				</header>
+				
+				<form action="id" id="add-project" class="scroll">
+					<ul class="edit rounded">
+						<li>
+							<label for="project-name">Project Name</label>
+							<input type="text" name="project-name" placeholder="insert name here" id="project-name">
+						</li>
+						<li>
+							<label for="project-rate">Hourly Rate</label>
+							<input type="text" name="project-rate" placeholder="50.00" id="project-rate">
+						</li>
+						<li>
+							<label for="project-description">Project Description</label>
+							<textarea name="project-description" placeholder="insert description here" id="project-description"></textarea>
+						</li>
+					</ul>
+					
+					<div class="hidden-page">
+						<button class="submit whiteButton">Add Project</button>
+					</div>
+					
+				</form>	
 
 			</div>
 			
@@ -50,7 +76,11 @@
 					<a class="back" href="#home"><i class="icon-home"></i></a>
 					<a class="button slideup" href="#edit-project"><i class="icon-edit"></i></a>
 				</header>
+				
+				<div class="page">
 
+				</div>
+				
 			</div>
 			
 			<div id="edit-project">
@@ -60,7 +90,29 @@
 					<a class="back" href="#view-project">Cancel</a>
 					<a class="button slideup" id="infoButton" href="#delete-project"><i class="icon-trash"></i></a>
 				</header>
-
+				
+				<form action="id" id="edit-project" class="scroll">
+					<ul class="edit rounded">
+						<li>
+							<label for="project-name">Project Name</label>
+							<input type="text" name="project-name" id="project-name">
+						</li>
+						<li>
+							<label for="project-rate">Hourly Rate</label>
+							<input type="text" name="project-rate" id="project-rate">
+						</li>
+						<li>
+							<label for="project-description">Project Description</label>
+							<textarea name="project-description" id="project-description"></textarea>
+						</li>
+					</ul>
+					
+					<div class="hidden-page">
+						<button class="submit whiteButton">Edit Project</button>
+					</div>
+					
+				</form>
+			
 			</div>
 			
 			<div id="delete-project">
@@ -78,6 +130,23 @@
 					<h1>Edit Timecard</h1>
 					<a class="back" href="#view-project">Cancel</a>
 				</header>
+				
+				<form action="id" id="edit-timecard" class="scroll">
+					<ul class="edit rounded">
+						<li>
+							<label for="timecard-time">Time</label>
+							<input type="text" name="timecard-time" id="timecard-time">
+						</li>
+						<li>
+							<label for="timecard-details">Details</label>
+							<textarea name="timecard-details" id="timecard-details"></textarea>
+						</li>
+					</ul>
+					
+					<div class="hidden-page">
+						<button class="submit whiteButton">Edit Timecard</button>
+					</div>
+				</form>
 			
 			</div>
 			
