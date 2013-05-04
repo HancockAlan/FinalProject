@@ -4,17 +4,9 @@
 	var currentProject;
 	var currentLastStart;
 	
-//	if (library.isNew()) {
-		library.dropTable("projects");
+	if (library.isNew()) {
 		library.createTable("projects",["name","rate","description","lastStart"]);
-//	}
-	
-	library.deleteRows("projects");
-	
-//	library.insert("projects",{name: "John's Website", rate: 45, description: "Need it done by Thursday at noon.", lastStart: $.now()});
-//	library.commit()
-//	currentProject = "John's Website";
-	
+	}
 	
 	// instantiate jQTouch	
 	var jQT;
